@@ -138,6 +138,14 @@
 - (void)scanForPeripheralsWithServices:(NSArray *)serviceUUIDs
                                options:(NSDictionary *)options
 {
+    [self scanForPeripheralsWithServices:serviceUUIDs changes:nil options:options];
+}
+
+- (void)scanForPeripheralsWithServices:(NSArray *)serviceUUIDs
+                               changes:(LGCentralManagerDiscoverPeripheralsChangesCallback)aChangesCallback
+                               options:(NSDictionary *)options
+{
+    self.changesBlock = aChangesCallback;
     [self.scannedPeripherals removeAllObjects];
     self.scanning = YES;
 	[self.manager scanForPeripheralsWithServices:serviceUUIDs

@@ -88,7 +88,6 @@ typedef void (^LGCentralManagerDiscoverPeripheralsChangesCallback) (LGPeripheral
  */
 - (void)scanForPeripherals;
 
-
 /**
  * Makes scan for peripherals with criterias,
  * fills - NSArray *peripherals
@@ -98,6 +97,19 @@ typedef void (^LGCentralManagerDiscoverPeripheralsChangesCallback) (LGPeripheral
  * @param options An optional dictionary specifying options to customize the scan.
  */
 - (void)scanForPeripheralsWithServices:(NSArray *)serviceUUIDs
+                               options:(NSDictionary *)options;
+
+/**
+ * Makes scan for peripherals with criterias,
+ * fills - NSArray *peripherals
+ * @param serviceUUIDs An array of CBUUID objects that the app is interested in.
+ * In this case, each CBUUID object represents the UUID of a service that
+ * a peripheral is advertising.
+ * @param aChangesCallback block which will be called on each peripheral update
+ * @param options An optional dictionary specifying options to customize the scan.
+ */
+- (void)scanForPeripheralsWithServices:(NSArray *)serviceUUIDs
+                               changes:(LGCentralManagerDiscoverPeripheralsChangesCallback)aChangesCallback
                                options:(NSDictionary *)options;
 
 /**
