@@ -170,7 +170,7 @@ typedef void (^LGCentralManagerDiscoverPeripheralsChangesCallback) (LGPeripheral
  * Returns a list of the peripherals (containing any of the specified services) currently connected to the system.
  * The list of connected peripherals can include those that are connected by other apps
  * and that will need to be connected locally using the connectPeripheral:options: method before they can be used.
- * @param serviceUUIDs A list of service UUIDs (represented by CBUUID objects).
+ * @param serviceUUIDS A list of service UUIDs (represented by CBUUID objects).
  * @return A list of the LGPeripherals that are currently connected to
  * the system and that contain any of the services specified in the serviceUUID parameter.
  */

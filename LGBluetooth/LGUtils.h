@@ -98,7 +98,7 @@ extern NSString * const kLGUtilsMissingCharacteristicErrorMessage;
  * @param aCharacteristic NSString representation of Characteristic UUID (in which data will be written)
  * @param aService NSString representation of Service UUID (which contains aCharacteristic)
  * @param aPeripheral LGPeripheral instance (which contains aService)
- * @param aCallabck will be invoked after successfull/failure operation
+ * @param aCallback will be invoked after successfull/failure operation
  */
 + (void)writeData:(NSData *)aData
       charactUUID:(NSString *)aCharacteristic
@@ -112,7 +112,7 @@ extern NSString * const kLGUtilsMissingCharacteristicErrorMessage;
  * @param aCharacteristic NSString representation of Characteristic UUID (from where data will be read)
  * @param aService NSString representation of Service UUID (which contains aCharacteristic)
  * @param aPeripheral LGPeripheral instance (which contains aService)
- * @param aCallabck will be invoked after successfull/failure operation
+ * @param aCallback will be invoked after successfull/failure operation
  */
 + (void)readDataFromCharactUUID:(NSString *)aCharacteristic
                     serviceUUID:(NSString *)aService
@@ -125,7 +125,7 @@ extern NSString * const kLGUtilsMissingCharacteristicErrorMessage;
  * @param aCharacteristic NSString representation of Characteristic UUID
  * @param aService NSString representation of Service UUID (which contains aCharacteristic)
  * @param aPeripheral LGPeripheral instance (which contains aService)
- * @param aCallabck will be invoked after successfull/failure operation
+ * @param aCallback will be invoked after successfull/failure operation
  */
 + (void)discoverCharactUUID:(NSString *)aCharacteristic
                 serviceUUID:(NSString *)aService
