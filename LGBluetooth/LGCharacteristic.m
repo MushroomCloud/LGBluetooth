@@ -40,6 +40,8 @@
 
 @property (strong, nonatomic) LGCharacteristicReadCallback updateCallback;
 
+- (CBService *)service;
+
 @end
 
 @implementation LGCharacteristic
@@ -99,8 +101,8 @@
     
     [self push:aCallback toArray:self.notifyOperationStack];
     
-    [self.cbCharacteristic.service.peripheral setNotifyValue:notifyValue
-                                           forCharacteristic:self.cbCharacteristic];
+    [self.service.peripheral setNotifyValue:notifyValue
+                          forCharacteristic:self.cbCharacteristic];
 }
 
 - (void)writeValue:(NSData *)data
@@ -112,9 +114,9 @@
     if (aCallback) {
         [self push:aCallback toArray:self.writeOperationStack];
     }
-    [self.cbCharacteristic.service.peripheral writeValue:data
-                                       forCharacteristic:self.cbCharacteristic
-                                                    type:type];
+    [self.service.peripheral writeValue:data
+                      forCharacteristic:self.cbCharacteristic
+                                   type:type];
 }
 
 - (void)writeByte:(int8_t)aByte
@@ -130,12 +132,20 @@
         return;
     }
     [self push:aCallback toArray:self.readOperationStack];
-    [self.cbCharacteristic.service.peripheral readValueForCharacteristic:self.cbCharacteristic];
+    [self.service.peripheral readValueForCharacteristic:self.cbCharacteristic];
 }
 
 /*----------------------------------------------------*/
 #pragma mark - Private Methods -
 /*----------------------------------------------------*/
+
+- (CBService *)service {
+    id service = self.cbCharacteristic.service;
+    if ([service isKindOfClass:[CBService class]]) {
+        return service;
+    }
+    return nil;
+}
 
 - (void)push:(id)anObject toArray:(NSMutableArray *)aArray
 {
