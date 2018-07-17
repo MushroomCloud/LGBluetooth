@@ -24,8 +24,9 @@
 
 @class LGPeripheral;
 @class CBCentralManager;
+@class CBUUID;
 
-typedef void (^LGCentralManagerDiscoverPeripheralsCallback) (NSArray *peripherals);
+typedef void (^LGCentralManagerDiscoverPeripheralsCallback) (NSArray<LGPeripheral *> *peripherals);
 typedef void (^LGCentralManagerDiscoverPeripheralsChangesCallback) (LGPeripheral *peripheral);
 
 /**
@@ -59,7 +60,7 @@ typedef void (^LGCentralManagerDiscoverPeripheralsChangesCallback) (LGPeripheral
 /**
  * Peripherals that are nearby (sorted descending by RSSI values)
  */
-@property (weak, nonatomic, readonly) NSArray *peripherals;
+@property (weak, nonatomic, readonly) NSArray<LGPeripheral *> *peripherals;
 
 /**
  * Core bluetooth's Central manager, for implementing central role
@@ -96,7 +97,7 @@ typedef void (^LGCentralManagerDiscoverPeripheralsChangesCallback) (LGPeripheral
  * a peripheral is advertising.
  * @param options An optional dictionary specifying options to customize the scan.
  */
-- (void)scanForPeripheralsWithServices:(NSArray *)serviceUUIDs
+- (void)scanForPeripheralsWithServices:(NSArray<CBUUID *> *)serviceUUIDs
                                options:(NSDictionary *)options;
 
 /**
@@ -108,7 +109,7 @@ typedef void (^LGCentralManagerDiscoverPeripheralsChangesCallback) (LGPeripheral
  * @param aChangesCallback block which will be called on each peripheral update
  * @param options An optional dictionary specifying options to customize the scan.
  */
-- (void)scanForPeripheralsWithServices:(NSArray *)serviceUUIDs
+- (void)scanForPeripheralsWithServices:(NSArray<CBUUID *> *)serviceUUIDs
                                changes:(LGCentralManagerDiscoverPeripheralsChangesCallback)aChangesCallback
                                options:(NSDictionary *)options;
 
@@ -149,7 +150,7 @@ typedef void (^LGCentralManagerDiscoverPeripheralsChangesCallback) (LGPeripheral
  * <i>aScanInterval</i> with nearby peripherals
  */
 - (void)scanForPeripheralsByInterval:(NSUInteger)aScanInterval
-                            services:(NSArray *)serviceUUIDs
+                            services:(NSArray<CBUUID *> *)serviceUUIDs
                              options:(NSDictionary *)options
                           completion:(LGCentralManagerDiscoverPeripheralsCallback)aCallback;
 
@@ -164,7 +165,7 @@ typedef void (^LGCentralManagerDiscoverPeripheralsChangesCallback) (LGPeripheral
  * from which LGperipheral objects can be retrieved.
  * @return A list of peripherals that the central manager is able to match to the provided identifiers.
  */
-- (NSArray *)retrievePeripheralsWithIdentifiers:(NSArray *)identifiers;
+- (NSArray<LGPeripheral *> *)retrievePeripheralsWithIdentifiers:(NSArray<NSUUID *> *)identifiers;
 
 /**
  * Returns a list of the peripherals (containing any of the specified services) currently connected to the system.
@@ -174,7 +175,7 @@ typedef void (^LGCentralManagerDiscoverPeripheralsChangesCallback) (LGPeripheral
  * @return A list of the LGPeripherals that are currently connected to
  * the system and that contain any of the services specified in the serviceUUID parameter.
  */
-- (NSArray *)retrieveConnectedPeripheralsWithServices:(NSArray *)serviceUUIDS;
+- (NSArray<LGPeripheral *> *)retrieveConnectedPeripheralsWithServices:(NSArray<CBUUID *> *)serviceUUIDS;
 
 /**
  * @return Singleton instance of Central manager

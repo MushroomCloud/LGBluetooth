@@ -23,9 +23,10 @@
 @class CBCharacteristic;
 @class CBService;
 @class CBPeripheral;
+@class CBUUID;
 @class LGCharacteristic;
 
-typedef void(^LGServiceDiscoverCharacterisitcsCallback)(NSArray *characteristics, NSError *error);
+typedef void(^LGServiceDiscoverCharacterisitcsCallback)(NSArray<LGCharacteristic *> *characteristics, NSError *error);
 
 @interface LGService : NSObject
 
@@ -53,7 +54,7 @@ typedef void(^LGServiceDiscoverCharacterisitcsCallback)(NSArray *characteristics
  * Available characteristics for this service, 
  * will be updated after discoverCharacteristicsWithCompletion: call
  */
-@property (strong, nonatomic) NSArray *characteristics;
+@property (strong, nonatomic) NSArray<LGCharacteristic *> *characteristics;
 
 /**
  * Discoveres All characteristics of this service
@@ -67,13 +68,13 @@ typedef void(^LGServiceDiscoverCharacterisitcsCallback)(NSArray *characteristics
  * we need to discover
  * @param aCallback Will be called after successfull/failure ble-operation
  */
-- (void)discoverCharacteristicsWithUUIDs:(NSArray *)uuids
+- (void)discoverCharacteristicsWithUUIDs:(NSArray<CBUUID *> *)uuids
                               completion:(LGServiceDiscoverCharacterisitcsCallback)aCallback;
 
 
 // ----- Used for input events -----/
 
-- (void)handleDiscoveredCharacteristics:(NSArray *)aCharacteristics error:(NSError *)aError;
+- (void)handleDiscoveredCharacteristics:(NSArray<CBCharacteristic *> *)aCharacteristics error:(NSError *)aError;
 
 - (LGCharacteristic *)wrapperByCharacteristic:(CBCharacteristic *)aChar;
 

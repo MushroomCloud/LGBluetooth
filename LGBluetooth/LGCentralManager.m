@@ -45,7 +45,7 @@
 /**
  * List of scanned peripherals
  */
-@property (strong, nonatomic) NSMutableArray *scannedPeripherals;
+@property (strong, nonatomic) NSMutableArray<LGPeripheral *> *scannedPeripherals;
 
 /**
  * Completion block for peripheral scanning
@@ -61,6 +61,9 @@
  * CBCentralManager's state updated by centralManagerDidUpdateState:
  */
 @property(nonatomic) CBCentralManagerState cbCentralManagerState;
+
+- (LGPeripheral *)wrapperByPeripheral:(CBPeripheral *)aPeripheral;
+- (NSArray<LGPeripheral *> *)wrappersByPeripherals:(NSArray<CBPeripheral *> *)peripherals;
 
 @end
 
@@ -80,7 +83,7 @@
     return [self stateMessage];
 }
 
-- (NSArray *)peripherals
+- (NSArray<LGPeripheral *> *)peripherals
 {
     // Sorting LGPeripherals by RSSI values
     NSArray *sortedArray;
@@ -135,13 +138,13 @@
     self.changesBlock = nil;
 }
 
-- (void)scanForPeripheralsWithServices:(NSArray *)serviceUUIDs
+- (void)scanForPeripheralsWithServices:(NSArray<CBUUID *> *)serviceUUIDs
                                options:(NSDictionary *)options
 {
     [self scanForPeripheralsWithServices:serviceUUIDs changes:nil options:options];
 }
 
-- (void)scanForPeripheralsWithServices:(NSArray *)serviceUUIDs
+- (void)scanForPeripheralsWithServices:(NSArray<CBUUID *> *)serviceUUIDs
                                changes:(LGCentralManagerDiscoverPeripheralsChangesCallback)aChangesCallback
                                options:(NSDictionary *)options
 {
@@ -171,7 +174,7 @@
 }
 
 - (void)scanForPeripheralsByInterval:(NSUInteger)aScanInterval
-                            services:(NSArray *)serviceUUIDs
+                            services:(NSArray<CBUUID *> *)serviceUUIDs
                              options:(NSDictionary *)options
                           completion:(LGCentralManagerDiscoverPeripheralsCallback)aCallback
 {
@@ -186,12 +189,12 @@
                afterDelay:aScanInterval];
 }
 
-- (NSArray *)retrievePeripheralsWithIdentifiers:(NSArray *)identifiers
+- (NSArray<LGPeripheral *> *)retrievePeripheralsWithIdentifiers:(NSArray<NSUUID *> *)identifiers
 {
     return [self wrappersByPeripherals:[self.manager retrievePeripheralsWithIdentifiers:identifiers]];
 }
 
-- (NSArray *)retrieveConnectedPeripheralsWithServices:(NSArray *)serviceUUIDS
+- (NSArray<LGPeripheral *> *)retrieveConnectedPeripheralsWithServices:(NSArray<CBUUID *> *)serviceUUIDS
 {
     return [self wrappersByPeripherals:[self.manager retrieveConnectedPeripheralsWithServices:serviceUUIDS]];
 }
@@ -246,7 +249,7 @@
     return wrapper;
 }
 
-- (NSArray *)wrappersByPeripherals:(NSArray *)peripherals
+- (NSArray<LGPeripheral *> *)wrappersByPeripherals:(NSArray<CBPeripheral *> *)peripherals
 {
     NSMutableArray *lgPeripherals = [NSMutableArray new];
     

@@ -58,7 +58,7 @@
                                 completion:aCallback];
 }
 
-- (void)discoverCharacteristicsWithUUIDs:(NSArray *)uuids
+- (void)discoverCharacteristicsWithUUIDs:(NSArray<CBUUID *> *)uuids
                               completion:(LGServiceDiscoverCharacterisitcsCallback)aCallback
 {
     self.discoverCharBlock = aCallback;
@@ -100,7 +100,7 @@
 #pragma mark - Handler Methods -
 /*----------------------------------------------------*/
 
-- (void)handleDiscoveredCharacteristics:(NSArray *)aCharacteristics error:(NSError *)aError
+- (void)handleDiscoveredCharacteristics:(NSArray<CBCharacteristic *> *)aCharacteristics error:(NSError *)aError
 {
     _discoveringCharacteristics = NO;
     [self updateCharacteristicWrappers];

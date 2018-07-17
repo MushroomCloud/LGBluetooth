@@ -22,6 +22,8 @@
 
 @class CBPeripheral;
 @class LGCentralManager;
+@class LGService;
+@class CBUUID;
 
 #pragma mark - Notification identifiers -
 
@@ -75,7 +77,7 @@ extern NSString * const kConnectionMissingErrorMessage;
 #pragma mark - Callback types -
 
 typedef void(^LGPeripheralConnectionCallback)(NSError *error);
-typedef void(^LGPeripheralDiscoverServicesCallback)(NSArray *services, NSError *error);
+typedef void(^LGPeripheralDiscoverServicesCallback)(NSArray<LGService *> *services, NSError *error);
 typedef void(^LGPeripheralRSSIValueCallback)(NSNumber *RSSI, NSError *error);
 
 #pragma mark - Public Interface -
@@ -103,7 +105,7 @@ typedef void(^LGPeripheralRSSIValueCallback)(NSNumber *RSSI, NSError *error);
  * Available services for this service,
  * will be updated after calling discoverServicesWithCompletion:
  */
-@property (strong, nonatomic, readonly) NSArray *services;
+@property (strong, nonatomic, readonly) NSArray<LGService *> *services;
 
 /**
  * UUID Identifier of peripheral
@@ -165,7 +167,7 @@ typedef void(^LGPeripheralRSSIValueCallback)(NSNumber *RSSI, NSError *error);
  * we need to discover
  * @param aCallback Will be called after successfull/failure ble-operation
  */
-- (void)discoverServices:(NSArray *)serviceUUIDs
+- (void)discoverServices:(NSArray<CBUUID *> *)serviceUUIDs
               completion:(LGPeripheralDiscoverServicesCallback)aCallback;
 
 

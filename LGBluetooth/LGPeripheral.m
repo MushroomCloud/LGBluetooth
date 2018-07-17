@@ -124,7 +124,7 @@ NSString * const kConnectionMissingErrorMessage = @"BLE Device is not connected"
                 completion:aCallback];
 }
 
-- (void)discoverServices:(NSArray *)serviceUUIDs
+- (void)discoverServices:(NSArray<CBUUID *> *)serviceUUIDs
               completion:(LGPeripheralDiscoverServicesCallback)aCallback
 {
     self.discoverServicesBlock = aCallback;
