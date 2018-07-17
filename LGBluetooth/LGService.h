@@ -26,7 +26,7 @@
 @class CBUUID;
 @class LGCharacteristic;
 
-typedef void(^LGServiceDiscoverCharacterisitcsCallback)(NSArray<LGCharacteristic *> *characteristics, NSError *error);
+typedef void(^LGServiceDiscoverCharacteristicsCallback)(NSArray<LGCharacteristic *> *characteristics, NSError *error);
 
 @interface LGService : NSObject
 
@@ -60,7 +60,7 @@ typedef void(^LGServiceDiscoverCharacterisitcsCallback)(NSArray<LGCharacteristic
  * Discoveres All characteristics of this service
  * @param aCallback Will be called after successfull/failure ble-operation
  */
-- (void)discoverCharacteristicsWithCompletion:(LGServiceDiscoverCharacterisitcsCallback)aCallback;
+- (void)discoverCharacteristicsWithCompletion:(LGServiceDiscoverCharacteristicsCallback)aCallback;
 
 /**
  * Discoveres Input characteristics of this service
@@ -69,7 +69,7 @@ typedef void(^LGServiceDiscoverCharacterisitcsCallback)(NSArray<LGCharacteristic
  * @param aCallback Will be called after successfull/failure ble-operation
  */
 - (void)discoverCharacteristicsWithUUIDs:(NSArray<CBUUID *> *)uuids
-                              completion:(LGServiceDiscoverCharacterisitcsCallback)aCallback;
+                              completion:(LGServiceDiscoverCharacteristicsCallback)aCallback;
 
 
 // ----- Used for input events -----/

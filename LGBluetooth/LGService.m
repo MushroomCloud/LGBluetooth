@@ -33,7 +33,7 @@
 
 @interface LGService ()
 
-@property (copy, nonatomic) LGServiceDiscoverCharacterisitcsCallback discoverCharBlock;
+@property (copy, nonatomic) LGServiceDiscoverCharacteristicsCallback discoverCharBlock;
 
 @end
 
@@ -52,14 +52,14 @@
 #pragma mark - Public Methods -
 /*----------------------------------------------------*/
 
-- (void)discoverCharacteristicsWithCompletion:(LGServiceDiscoverCharacterisitcsCallback)aCallback
+- (void)discoverCharacteristicsWithCompletion:(LGServiceDiscoverCharacteristicsCallback)aCallback
 {
     [self discoverCharacteristicsWithUUIDs:nil
                                 completion:aCallback];
 }
 
 - (void)discoverCharacteristicsWithUUIDs:(NSArray<CBUUID *> *)uuids
-                              completion:(LGServiceDiscoverCharacterisitcsCallback)aCallback
+                              completion:(LGServiceDiscoverCharacteristicsCallback)aCallback
 {
     self.discoverCharBlock = aCallback;
     _discoveringCharacteristics = YES;
