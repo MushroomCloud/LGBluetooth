@@ -244,7 +244,7 @@ NSString * const kConnectionMissingErrorMessage = @"BLE Device is not connected"
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverServices:(NSError *)error
 {
     dispatch_async(dispatch_get_main_queue(), ^{
-        _discoveringServices = NO;
+        self->_discoveringServices = NO;
         [self updateServiceWrappers];
 
 #if LG_ENABLE_BLE_LOGGING != 0
