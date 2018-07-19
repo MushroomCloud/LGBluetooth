@@ -51,15 +51,12 @@ extern NSString * const kLGPeripheralDidDisconnect;
 extern NSString * const kLGPeripheralConnectionErrorDomain;
 
 #pragma mark - Error Codes -
-/**
- * Connection timeout error code
- */
-extern const NSInteger kConnectionTimeoutErrorCode;
 
-/**
- * Connection missing error code
- */
-extern const NSInteger kConnectionMissingErrorCode;
+typedef NS_ENUM(NSUInteger, LGPeripheralErrorCode)
+{
+    LGPeripheralErrorCodeTimeout = 408,
+    LGPeripheralErrorCodeNotConnected = 409
+};
 
 #pragma mark - Error Messages -
 

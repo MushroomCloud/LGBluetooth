@@ -39,10 +39,6 @@ NSString * const kLGPeripheralDidDisconnect = @"LGPeripheralDidDisconnect";
 // Error Domains
 NSString * const kLGPeripheralConnectionErrorDomain = @"LGPeripheralConnectionErrorDomain";
 
-// Error Codes
-const NSInteger kConnectionTimeoutErrorCode = 408;
-const NSInteger kConnectionMissingErrorCode = 409;
-
 NSString * const kConnectionTimeoutErrorMessage = @"BLE Device can't be connected by given interval";
 NSString * const kConnectionMissingErrorMessage = @"BLE Device is not connected";
 
@@ -132,7 +128,7 @@ NSString * const kConnectionMissingErrorMessage = @"BLE Device is not connected"
         _discoveringServices = YES;
         [self.cbPeripheral discoverServices:serviceUUIDs];
     } else if (self.discoverServicesBlock) {
-        self.discoverServicesBlock(nil, [self connectionErrorWithCode:kConnectionMissingErrorCode
+        self.discoverServicesBlock(nil, [self connectionErrorWithCode:LGPeripheralErrorCodeNotConnected
                                                               message:kConnectionMissingErrorMessage]);
         self.discoverServicesBlock = nil;
     }
@@ -144,7 +140,7 @@ NSString * const kConnectionMissingErrorMessage = @"BLE Device is not connected"
     if (self.isConnected) {
         [self.cbPeripheral readRSSI];
     } else if (self.rssiValueBlock) {
-        self.rssiValueBlock(nil, [self connectionErrorWithCode:kConnectionMissingErrorCode
+        self.rssiValueBlock(nil, [self connectionErrorWithCode:LGPeripheralErrorCodeNotConnected
                                                        message:kConnectionMissingErrorMessage]);
         self.rssiValueBlock = nil;
     }
@@ -206,7 +202,7 @@ NSString * const kConnectionMissingErrorMessage = @"BLE Device is not connected"
         __strong LGPeripheral *strongSelf = weakSelf;
         if (strongSelf.connectionBlock) {
             // Delivering connection timeout
-            strongSelf.connectionBlock([self connectionErrorWithCode:kConnectionTimeoutErrorCode
+            strongSelf.connectionBlock([self connectionErrorWithCode:LGPeripheralErrorCodeTimeout
                                                              message:kConnectionTimeoutErrorMessage]);
         }
         self.connectionBlock = nil;
